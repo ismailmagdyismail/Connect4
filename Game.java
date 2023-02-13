@@ -25,7 +25,7 @@ public class Game {
 
     private void getGridDimension(){
         int dimension = 0;
-        while (dimension <= 0){
+        while (dimension < 5){
             System.out.print("Please,Enter valid Board dimension(s) :");
             dimension = scanner.nextInt();
         }

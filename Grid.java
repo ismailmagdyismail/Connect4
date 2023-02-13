@@ -1,7 +1,3 @@
-import jdk.internal.util.xml.impl.Pair;
-
-import java.sql.Array;
-
 public class Grid implements Board{
     int dimensions ;
     private String[][] grid ;
@@ -26,11 +22,12 @@ public class Grid implements Board{
     @Override
     public int[] addPiece(int column, String symbol) {
         column --;
+        if(!isValidColumn(column)) {
+            throw new IndexOutOfBoundsException("Invalid column");
+        }
         int[] cell = new int[2];
         cell[0] = cell[1] = -1;
-        if(!isValidColumn(column))
-            throw new IndexOutOfBoundsException("Invalid column");
-        for (int i = dimensions-1 ;i>=0;i--){
+        for (int i = dimensions-1 ; i >= 0; i--){
             if(grid[i][column].equals("-")){
                 cell[0] = i;
                 cell[1] = column;
@@ -41,6 +38,10 @@ public class Grid implements Board{
     }
 
     private void initializeGrid(int dimensions){
+        if(dimensions < 5){
+            throw new IndexOutOfBoundsException("Invalid column");
+        }
+        this.dimensions = dimensions;
         grid = new String[dimensions][dimensions];
         for (int i =0 ;i < dimensions;i++){
             for (int j= 0;j < dimensions;j++){

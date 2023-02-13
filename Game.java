@@ -1,11 +1,12 @@
+import java.awt.*;
 import java.util.Scanner;
 
 public class Game {
-    private Scanner scanner  = new Scanner(System.in);
+    private final Scanner scanner  = new Scanner(System.in);
     private  Board grid;
     private Player[] players;
-    private Printer printer;
-    private MoveAction moveAction;
+    private final Printer printer;
+    private final MoveAction moveAction;
     public Game(){
         players = new Player[2];
         printer = new Printer();
@@ -13,14 +14,32 @@ public class Game {
     }
 
     public void run(){
+        getPlayersInfo();
         getGridDimension();
-        String[][] board = grid.getGrid();
-        for (int i =0 ; i<grid.getGrid().length;i++){
-            for (int j =0 ; j<grid.getGrid().length;j++){
-               board[i][j]= "1";
-            }
+        while (true){
+            printer.PrintBoard(grid);
+            // make move 1
+            // check winner , draw
+            // make move 2
+            // check winner , draw
+            break;
         }
-        printer.PrintBoard(grid);
+    }
+
+    private void getPlayersInfo(){
+        String firstPlayerName  = new String();
+        while (firstPlayerName.isEmpty()){
+            System.out.print("Enter Red player's Name :");
+            firstPlayerName = scanner.nextLine();
+        }
+        players[0] = new Player(firstPlayerName, Symbol.R);
+
+        String secondPlayerName  = new String();
+        while (secondPlayerName.isEmpty()){
+            System.out.print("Enter Yellow player's Name :");
+            secondPlayerName = scanner.nextLine();
+        }
+        players[0] = new Player(secondPlayerName, Symbol.Y);
     }
 
     private void getGridDimension(){
@@ -31,4 +50,6 @@ public class Game {
         }
         grid = new Grid(dimension);
     }
+
+
 }

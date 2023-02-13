@@ -47,13 +47,7 @@ public class Grid implements Board{
                 grid[i][j] = "-";
             }
         }
-      /*  for (int i =0 ;i<dimensions;i++){
-            for (int j= 0;j<dimensions;j++){
-                System.out.print(grid[i][j]);
-                System.out.print("||");
-            }
-            System.out.print("\n");
-        }*/
+      
     }
     private boolean isValidColumn(int column ){
         return  column >= 0 && column < dimensions;

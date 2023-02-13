@@ -1,4 +1,5 @@
 public class Grid implements Board{
+    private static int required;
     int dimensions ;
     private String[][] grid ;
     public Grid(int dimensions ){
@@ -6,7 +7,7 @@ public class Grid implements Board{
     }
     @Override
     public boolean isWinner() {
-        return false;
+        return checkColumn() || checkRow() || checkDiagonal();
     }
 
     @Override
@@ -55,5 +56,32 @@ public class Grid implements Board{
     }
     private boolean isValidRow(int row ){
         return  row >= 0 && row < dimensions;
+    }
+
+    private boolean checkColumn() {
+        for(int j = 0 ;j<dimensions;j++){
+            int connected = 1;
+            for (int i = 1 ; i<dimensions;i++){
+                if(grid[i][j].equals(grid[i-1][j]))
+                    connected++;
+                else connected = 1;
+                if(connected == required)
+                    return true;
+            }
+        }
+        return false;
+    }
+    private boolean checkRow() {
+        for(int i = 0 ;i<dimensions;i++){
+            int connected = 1;
+            for (int j = 1 ; j<dimensions;j++){
+                if(grid[i][j].equals(grid[i][j-1]))
+                    connected++;
+                else connected = 1;
+                if(connected == required)
+                    return true;
+            }
+        }
+        return false;
     }
 }

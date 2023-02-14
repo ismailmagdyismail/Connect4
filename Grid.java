@@ -38,6 +38,12 @@ public class Grid implements Board{
         return cell;
     }
 
+    public boolean isValidColumn(int column ){
+        return  column >= 0 && column < dimensions;
+    }
+    public boolean isValidRow(int row ){
+        return  row >= 0 && row < dimensions;
+    }
     private void initializeGrid(int dimensions){
         if(dimensions < 5){
             throw new IndexOutOfBoundsException("Invalid column");
@@ -50,12 +56,6 @@ public class Grid implements Board{
             }
         }
       
-    }
-    public boolean isValidColumn(int column ){
-        return  column >= 0 && column < dimensions;
-    }
-    public boolean isValidRow(int row ){
-        return  row >= 0 && row < dimensions;
     }
 
     private boolean checkColumn() {

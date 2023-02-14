@@ -1,9 +1,11 @@
 public class Grid implements Board{
-    private static int required = 4;
+    private static int connectN = 4;
     int dimensions ;
     private String[][] grid ;
-    public Grid(int dimensions ){
-        initializeGrid(dimensions);
+    public Grid(int dimensions )
+    {
+        this.dimensions = dimensions;
+        initializeGrid();
     }
     @Override
     public boolean isWinner() {
@@ -46,8 +48,8 @@ public class Grid implements Board{
     public boolean isValidRow(int row ){
         return  row >= 0 && row < dimensions;
     }
-    private void initializeGrid(int dimensions){
-        if(dimensions < 5){
+    private void initializeGrid(){
+        if(dimensions <= connectN){
             throw new IndexOutOfBoundsException("Invalid column");
         }
         this.dimensions = dimensions;
@@ -67,7 +69,7 @@ public class Grid implements Board{
                 if(grid[i][j].equals(grid[i-1][j]) && !grid[i][j].equals("-") )
                     connected++;
                 else connected = 1;
-                if(connected == required)
+                if(connected == connectN)
                     return true;
             }
         }
@@ -80,7 +82,7 @@ public class Grid implements Board{
                 if(grid[i][j].equals(grid[i][j-1]) && !grid[i][j].equals("-"))
                     connected++;
                 else connected = 1;
-                if(connected == required)
+                if(connected == connectN)
                     return true;
             }
         }
@@ -95,7 +97,7 @@ public class Grid implements Board{
                     if(grid[x][y].equals(grid[x-1][y-1]) && !grid[x][y].equals("-"))
                         connected++;
                     else connected = 1;
-                    if(connected == required)
+                    if(connected == connectN)
                         return true;
                     x++;
                     y++;
@@ -114,7 +116,7 @@ public class Grid implements Board{
                     if(grid[x][y].equals(grid[x-1][y+1]) && !grid[x][y].equals("-"))
                         connected++;
                     else connected = 1;
-                    if(connected == required)
+                    if(connected == connectN)
                         return true;
                     x++;
                     y--;

@@ -5,4 +5,5 @@ public interface Board {
     public int[] addPiece(int column , String symbol);
     public boolean isValidColumn(int column );
     public boolean isValidRow(int row );
+    public int getDimension();
 }

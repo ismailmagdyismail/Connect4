@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.Scanner;
 
 public class Game {
@@ -17,12 +16,42 @@ public class Game {
         getPlayersInfo();
         getGridDimension();
         while (true){
-            printer.PrintBoard(grid);
-            // make move 1
-            // check winner , draw
-            // make move 2
-            // check winner , draw
-            break;
+            boolean isValidFirstMove = false;
+            while (!isValidFirstMove){
+                printer.PrintBoard(grid);
+                System.out.print("FIRST ");
+                System.out.println(players[0].getName());
+                int column = getColumn();
+                isValidFirstMove = moveAction.makeMove(grid,column,Symbol.R);
+            }
+            if(grid.isWinner()) {
+                printer.PrintBoard(grid);
+                System.out.println("Congrats, Player 1 Won");
+                break;
+            }
+            else if (grid.isDraw()) {
+                printer.PrintBoard(grid);
+                System.out.println("The game ended in a Draw");
+                break;
+            }
+            boolean isValidSecondMove = false;
+            while (!isValidSecondMove){
+                printer.PrintBoard(grid);
+                System.out.print("SECOND ");
+                System.out.println(players[1].getName());
+                int column = getColumn();
+                isValidSecondMove = moveAction.makeMove(grid,column,Symbol.Y);
+            }
+            if(grid.isWinner()) {
+                printer.PrintBoard(grid);
+                System.out.println("Congrats, Player 2 Won");
+                break;
+            }
+            else if (grid.isDraw()) {
+                printer.PrintBoard(grid);
+                System.out.println("The game ended in a Draw");
+                break;
+            }
         }
     }
 
@@ -39,7 +68,7 @@ public class Game {
             System.out.print("Enter Yellow player's Name :");
             secondPlayerName = scanner.nextLine();
         }
-        players[0] = new Player(secondPlayerName, Symbol.Y);
+        players[1] = new Player(secondPlayerName, Symbol.Y);
     }
 
     private void getGridDimension(){
@@ -51,5 +80,13 @@ public class Game {
         grid = new Grid(dimension);
     }
 
-
+    private int getColumn(){
+        int column = -1;
+        while (!grid.isValidColumn(column)){
+            System.out.print("Enter a column between 1 and "+grid.getDimension()+" to insert Symbol in");
+            column = scanner.nextInt();
+            column--;
+        }
+        return column;
+    }
 }

@@ -11,10 +11,6 @@ public class Player {
         return this.name;
     }
 
-    public Symbol getColor() {
-        return this.color;
-    }
-
     public String getSymbol() {
         return this.color.toString();
     }

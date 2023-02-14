@@ -1,5 +1,5 @@
 public class Printer {
-    public void PrintBoard(Board board){
+    public void printBoard(Board board){
         String[][] grid = board.getGrid();
         int rows = grid.length;
         int columns = grid.length;
@@ -18,5 +18,8 @@ public class Printer {
             }
             System.out.print('\n');
         }
+    }
+    public void printPlayer(Player player){
+        System.out.println(player.getName()+"("+player.getSymbol()+")");
     }
 }

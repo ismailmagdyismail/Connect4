@@ -1,57 +1,37 @@
 import java.util.Scanner;
-
 public class Game {
     private final Scanner scanner  = new Scanner(System.in);
     private  Board grid;
     private Player[] players;
     private final Printer printer;
-    private final MoveAction moveAction;
+    private final MoveAction move;
     public Game(){
         players = new Player[2];
         printer = new Printer();
-        moveAction = new MoveAction();
+        move = new MoveAction(printer);
     }
 
-    public void run(){
+    public void runGame(){
         getPlayersInfo();
         getGridDimension();
+        int idx = 0 ;
         while (true){
-            boolean isValidFirstMove = false;
-            while (!isValidFirstMove){
-                printer.PrintBoard(grid);
-                System.out.print("FIRST ");
-                System.out.println(players[0].getName());
-                int column = getColumn();
-                isValidFirstMove = moveAction.makeMove(grid,column,Symbol.R);
+            boolean isValidMove = false;
+            while (!isValidMove){
+                isValidMove = move.playMove(grid,players[idx]);
             }
             if(grid.isWinner()) {
-                printer.PrintBoard(grid);
-                System.out.println("Congrats, Player 1 Won");
+                printer.printBoard(grid);
+                System.out.println("Congrats, Player "+(idx+1)+" Won");
                 break;
             }
             else if (grid.isDraw()) {
-                printer.PrintBoard(grid);
+                printer.printBoard(grid);
                 System.out.println("The game ended in a Draw");
                 break;
             }
-            boolean isValidSecondMove = false;
-            while (!isValidSecondMove){
-                printer.PrintBoard(grid);
-                System.out.print("SECOND ");
-                System.out.println(players[1].getName());
-                int column = getColumn();
-                isValidSecondMove = moveAction.makeMove(grid,column,Symbol.Y);
-            }
-            if(grid.isWinner()) {
-                printer.PrintBoard(grid);
-                System.out.println("Congrats, Player 2 Won");
-                break;
-            }
-            else if (grid.isDraw()) {
-                printer.PrintBoard(grid);
-                System.out.println("The game ended in a Draw");
-                break;
-            }
+            idx++;
+            idx %= 2;
         }
     }
 
@@ -80,13 +60,5 @@ public class Game {
         grid = new Grid(dimension);
     }
 
-    private int getColumn(){
-        int column = -1;
-        while (!grid.isValidColumn(column)){
-            System.out.print("Enter a column between 1 and "+grid.getDimension()+" to insert Symbol in");
-            column = scanner.nextInt();
-            column--;
-        }
-        return column;
-    }
+
 }

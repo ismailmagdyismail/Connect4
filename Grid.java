@@ -51,10 +51,10 @@ public class Grid implements Board{
         }
       
     }
-    private boolean isValidColumn(int column ){
+    public boolean isValidColumn(int column ){
         return  column >= 0 && column < dimensions;
     }
-    private boolean isValidRow(int row ){
+    public boolean isValidRow(int row ){
         return  row >= 0 && row < dimensions;
     }
 

@@ -22,4 +22,11 @@ public class Printer {
     public void printPlayer(Player player){
         System.out.println(player.getName()+"("+player.getSymbol()+")");
     }
+
+    public void printWinningMsg(Player player){
+        System.out.println("Congrats,"+player.getName()+"("+player.getSymbol()+") Won");
+    }
+    public void printDrawMsg(){
+        System.out.println("The Game Ended in A DRAW");
+    }
 }

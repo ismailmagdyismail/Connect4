@@ -22,12 +22,12 @@ public class Game {
             }
             if(grid.isWinner()) {
                 printer.printBoard(grid);
-                System.out.println("Congrats, Player "+(idx+1)+" Won");
+                printer.printWinningMsg(players[idx]);
                 break;
             }
             else if (grid.isDraw()) {
                 printer.printBoard(grid);
-                System.out.println("The game ended in a Draw");
+                printer.printDrawMsg();
                 break;
             }
             idx++;

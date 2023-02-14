@@ -84,4 +84,22 @@ public class Grid implements Board{
         }
         return false;
     }
+    private boolean checkDiagonal() {
+        for(int i = 0 ;i<dimensions;i++){
+            for (int j = 1 ; j<dimensions;j++){
+                int x = i+1 , y = j+1;
+                int connected = 1;
+                while (i<dimensions && j<dimensions){
+                    if(grid[x][y] .equals(grid[x-1][y-1]))
+                        connected++;
+                    else connected = 1;
+                    if(connected == required)
+                        return true;
+                    i++;
+                    j++;
+                }
+            }
+        }
+        return false;
+    }
 }

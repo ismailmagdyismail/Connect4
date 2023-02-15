@@ -18,6 +18,10 @@ public class Printer {
             }
             System.out.print('\n');
         }
+        for (int i = 0 ;i<columns;i++){
+            System.out.print("=====");
+        }
+        System.out.print('\n');
     }
     public void printPlayer(Player player){
         System.out.println(player.getName()+"("+player.getSymbol()+")");

@@ -59,7 +59,7 @@ public class Grid implements Board{
     }
     private void initializeGrid(){
         if(dimension <= connectN){
-            throw new IndexOutOfBoundsException("Invalid column");
+            throw new IndexOutOfBoundsException("Invalid dimensions");
         }
         this.dimension = dimension;
         grid = new String[dimension][dimension];
